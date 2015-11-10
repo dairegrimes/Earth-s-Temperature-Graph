@@ -7,7 +7,7 @@ void setup()
 void draw()
 {
    
-      
+        background(0);
         String[] lines = loadStrings("oil.txt"); // Load each line into a String array
         ArrayList<Float> sumdata = new ArrayList<Float>(); // Create an arraylist
         for(String s:lines)
@@ -22,7 +22,8 @@ void draw()
       
       stroke(0, 255, 255);
       
-
+      float border = width * 0.1f;
+      
       for (int i = 1 ; i < sumdata.size() ; i ++)
       {
         float x1 = (i - 1);
@@ -30,13 +31,28 @@ void draw()
         float y1 = sumdata.get(i - 1);
         float y2 = (sumdata.get(i));
         
-        float rx1 = map(x1,0,sumdata.size(),0,width);
-        float rx2 = map(x2,0,sumdata.size(),0,width);
-        float ry1 = map(y1,0,max,0,width);
-        float ry2 = map(y2,0,max,0,width);
+        float rx1 = map(x1,0,sumdata.size(),border,width - border);
+        float rx2 = map(x2,0,sumdata.size(),border,width - border);
+        float ry1 = map(y1,0,max,border,height - border);
+        float ry2 = map(y2,0,max,border,height - border);
         
         line(rx1, height - ry1, rx2,height -  ry2);
       }
+      
+      
+      
+      for(int i = 0; i < sumdata.size(); i ++)
+      {
+        line(50, border,50,border + 50);
+        border += 50;
+      }
+      
+      for(int i = 0; i < sumdata.size(); i ++)
+      {
+        line(border, height - border,border + 50,height - border);
+        border += 50;
+      }
+      
       
 }
 
@@ -56,3 +72,5 @@ float maxprice(ArrayList<Float> sumdata)
   return max;
   
 }
+
+
