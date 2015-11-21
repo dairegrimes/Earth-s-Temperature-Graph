@@ -1,6 +1,8 @@
+ArrayList<Temperture> data = new ArrayList<Temperture>();
+
 void setup()
 {
-  size(500,500);
+  size(1280,800);
 }
 
 
@@ -8,68 +10,81 @@ void draw()
 {
    
         background(0);
-        String[] lines = loadStrings("oil.txt"); // Load each line into a String array
-        ArrayList<Float> sumdata = new ArrayList<Float>(); // Create an arraylist
+        String[] lines = loadStrings("tempertures.csv"); // Load each line into a String array
+         // Create an arraylist
         for(String s:lines)
         {
-        // Add each element from the string array to the arrraylist
-        float f = Float.parseFloat(s);
-        sumdata.add(f);
+          // Add each element from the string array to the arrraylist
+          Temperture temp = new Temperture(s);
+          data.add(temp);
         }
         
-        float max = maxprice(sumdata);
-
+        float max = maxtemp(data);
+        float min = mintemp(data);
+       println(max);
       
       stroke(0, 255, 255);
-      
-      float border = width * 0.1f;
-      
-      for (int i = 1 ; i < sumdata.size() ; i ++)
+  
+      float border = width * 0.2f;
+     
+      float firstvalue = data.get(0).annual;
+    
+      for (int i = 1 ; i < 134 ; i ++)
       {
         float x1 = (i - 1);
         float x2 = (i);
-        float y1 = sumdata.get(i - 1);
-        float y2 = (sumdata.get(i));
+        float y1 = data.get(i - 1).annual;
+        float y2 = data.get(i).annual;
         
-        float rx1 = map(x1,0,sumdata.size(),border,width - border);
-        float rx2 = map(x2,0,sumdata.size(),border,width - border);
-        float ry1 = map(y1,0,max,border,height - border);
-        float ry2 = map(y2,0,max,border,height - border);
+        float rx1 = map(x1,0,134,border,width - border);
+        float rx2 = map(x2,0,134,border,width - border);
+        float ry1 = map(y1,min,max,border,height-border);
+        float ry2 = map(y2,min,max,border,height-border);
+        float zero = map(data.get(0).annual,-47,74,border,height-border);
         
-        line(rx1, height - ry1, rx2,height -  ry2);
+        line(rx1, height - ry1, rx2,height - ry2);
+        line(border,height - zero + firstvalue ,width - border,height - zero + firstvalue);
+       
       }
-      
-      
-      
-      for(int i = 0; i < sumdata.size(); i ++)
-      {
-        line(50, border,50,border + 50);
-        border += 50;
-      }
-      
-      for(int i = 0; i < sumdata.size(); i ++)
-      {
-        line(border, height - border,border + 50,height - border);
-        border += 50;
-      }
+
+
       
       
 }
 
 // Method for calculating the max
-float maxprice(ArrayList<Float> sumdata) 
+
+float maxtemp(ArrayList<Temperture> data) 
 {
   float max = 0;
-  max = sumdata.get(0);
+  max = data.get(0).annual;
   
-  for(int i = 0; i < sumdata.size(); i ++)
+  for(int i = 0; i < data.size(); i ++)
   {
-    if(sumdata.get(i) > max)
+    if(data.get(i).annual > max)
     {
-      max = sumdata.get(i);
+      max = data.get(i).annual;
     }
   }
   return max;
+  
+}
+
+// Method for calculating the min
+
+float mintemp(ArrayList<Temperture> data) 
+{
+  float min = 0;
+  min = data.get(0).annual;
+  
+  for(int i = 0; i < data.size(); i ++)
+  {
+    if(data.get(i).annual < min)
+    {
+      min = data.get(i).annual;
+    }
+  }
+  return min;
   
 }
 
