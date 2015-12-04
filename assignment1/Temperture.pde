@@ -3,10 +3,10 @@ class Temperture
   float annual;
   float year;
   
-  Temperture(String data)
+  Temperture(String s)
   {
-    String[] parts = data.split(",");
+    String[] parts = s.split(",");
     year = Float.parseFloat(parts[0]);
-    annual = Float.parseFloat(parts[13]);
+    annual = Float.parseFloat(parts[13]); 
   }
 }
