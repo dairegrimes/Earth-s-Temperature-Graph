@@ -63,7 +63,8 @@ void loaddata()
 
 void drawgraph()
 {
-       float border = width * 0.15f; 
+       float border = width * 0.15f;
+       
         
        if (mouseX >= border && mouseX <= width - border)
       {
@@ -261,9 +262,10 @@ void home()
         }
         
         textSize(32);
-        text("1 HomePage", width / 2 - 100, height / 2 + 50);
-        text("2 Circle Graph" ,width / 2 - 100, height / 2 + 100);
-        text("3 Line Graph", width / 2 - 100, height / 2 + 150);
+        text("The Earths Temperture from 1933 - 2013", width / 2 - 300, height / 2 + 50);
+        text("1 HomePage", width / 2 - 100, height / 2 + 100);
+        text("2 Circle Graph" ,width / 2 - 100, height / 2 + 150);
+        text("3 Line Graph", width / 2 - 100, height / 2 + 200);
         
   }
   
