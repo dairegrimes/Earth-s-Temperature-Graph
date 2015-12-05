@@ -62,30 +62,29 @@ void loaddata()
 
 void drawgraph()
 {
-        float border = width * 0.15f; 
+       float border = width * 0.15f; 
+        
        if (mouseX >= border && mouseX <= width - border)
       {
-      float x = map(mouseX,0,width,255,0);
-      float y = map(mouseX,0,width,0,255);
-      background(y,0,x);
-      
+        float x = map(mouseX,0,width,255,0);
+        float y = map(mouseX,0,width,0,255);
+        background(y,0,x);
       }
+      
     
-      stroke(0, 255, 255);
+      stroke(0, 0, 255);
       
       int border2 = 25;
       float firstvalue = data.get(0).annual;
 
       for (int i = 1 ; i < 81 ; i ++)
       {
-
         float rx1 = map((i - 1),0,81,border,width - border);
         float rx2 = map((i),0,81,border,width - border);
         float ry1 = map(data.get(i - 1).annual,min,max,border,height-border);
         float ry2 = map(data.get(i).annual,min,max,border,height-border);
         
         line(rx1, height - ry1, rx2,height - ry2);
-   
        }
       
          float zero = map(data.get(0).annual,-47,74,border,height-border);
@@ -127,16 +126,20 @@ void circleyears()
         {
           stroke(255,0,0);
           fill(255,0,0);
+          text("Red is values above 0",400,75);
+          textSize(16);
         }
         else
         {
           stroke(0,0,255);
           fill(0,0,255);
+          text("Blue is values below 0",400,50);
+          textSize(16);
         }
         
           ellipse(x + 27.5 + slide ,y  + 27.5,data.get(i).annual,data.get(i).annual);
-            i++;
-            slide += 0.3;
+          i++;
+          slide += 0.3;
         }
         
              if(slide >= 0)
@@ -160,17 +163,16 @@ void circleyears()
 
             if(dh < 1)
             {
-              text("0." + (int)data.get(dw).annual + " °C",50,50);
+              text((int)data.get(dw).annual + " °C",50,50);
               text((int)data.get(dw).year,50,75);
               textSize(16);
             }
           
             else
             {
-              text("0." + (int)data.get(dh * 9 + dw).annual + " °C",50,50);
+              text((int)data.get(dh * 9 + dw).annual + " °C",50,50);
               text((int)data.get(dh * 9 + dw).year,50,75);
               textSize(16);
-
             }
         }
      }
@@ -196,7 +198,7 @@ void drawGDPAmount()
     ellipse(mouseX, y, 5, 5);
     fill(255);
     text((int)data.get(i).year, 50, 75);
-    text((int)data.get(i).annual, 50, 50);
+    text((int)data.get(i).annual + " °C", 50, 50);
     textSize(16);
   }
 } // drawGDPAmount()
@@ -206,19 +208,17 @@ void drawGDPAmount()
 void home()
 {
       // HOME PAGE GRAPH
-      stroke(0, 255, 255);
-      float border = width * 0.5f; // 120
+      stroke(0, 0, 255);
+      float border = width * 0.5f; 
 
 
       for (int i = 1 ; i < 81 ; i ++)
       {
-        
         float rx1 = map((i - 1),0,81,border,width);
         float rx2 = map((i),0,81,border,width);
         float ry1 = map(data.get(i - 1).annual,min,max,border,height);
         float ry2 = map(data.get(i).annual,min,max,border,height);
         line(rx1, height - ry1, rx2 ,height - ry2);
-       
        }
 
          //y-axis
@@ -263,7 +263,7 @@ void keyPressed()
     mode = key - '0';
   }
   println(mode);
-} // keyPressed()
+} // End keyPressed()
 
 
 
