@@ -16,6 +16,7 @@ void draw()
    
         background(200);
         stroke(255);
+        textSize(16);
         loaddata();
         max = maxtemp(data);
         min = mintemp(data);
@@ -86,14 +87,21 @@ void drawgraph()
         
         line(rx1, height - ry1, rx2,height - ry2);
        }
+       int shift = 0;
+       
+       for(int j = 0; shift < 610; j += 10)
+       {
+         text((int)data.get(j).year,(border - 25) + shift,height - border + 25);
+         shift += 70;
+       }
       
          float zero = map(data.get(0).annual,-47,74,border,height-border);
               
-         text(0,border-border2,height - zero + firstvalue+5);
+         text(0 + " °C",border-border2 - 20,height - zero + firstvalue+5);
          
-         text((int)max,border-border2,border);
+         text((int)max + " °C",border-border2 - 20,border);
         
-         text((int)min,border-border2 ,height - border);
+         text((int)min + " °C",border-border2 - 30,height - border);
       
          stroke(0,0,255);
          //0-axis
@@ -251,6 +259,12 @@ void home()
           ellipse(x + 27.5  / 2,y  + 27.5 / 2,data.get(i).annual  / 2,data.get(i).annual / 2);
           i++;
         }
+        
+        textSize(32);
+        text("1 HomePage", width / 2 - 100, height / 2 + 50);
+        text("2 Circle Graph" ,width / 2 - 100, height / 2 + 100);
+        text("3 Line Graph", width / 2 - 100, height / 2 + 150);
+        
   }
   
 } // end home()
