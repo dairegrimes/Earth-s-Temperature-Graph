@@ -2,6 +2,9 @@ ArrayList<Temperture> data = new ArrayList<Temperture>(); //<>//
 float max;
 float min;
 float slide = -2000;
+float slideup1 = 2000;
+float slideup2 = 3000;
+float slideup3 = 4000;
 int mode = 1;
 
 
@@ -71,10 +74,11 @@ void drawgraph()
         float x = map(mouseX,0,width,255,0);
         float y = map(mouseX,0,width,0,255);
         background(y,0,x);
+        stroke(x,0,y);
       }
       
     
-      stroke(0, 0, 255);
+      //stroke(0, 0, 255);
       
       int border2 = 25;
       float firstvalue = data.get(0).annual;
@@ -151,7 +155,7 @@ void circleyears()
           slide += 0.3;
         }
         
-             if(slide >= 0)
+            if(slide >= 0)
           {
             slide = 0;
           }
@@ -161,14 +165,14 @@ void circleyears()
         
         if(slide == 0)
         {
-          
-          if(mouseX > 110 - 37.5 && mouseY > 80 && mouseX < width - 110 + 27.5  && mouseY < height - 110 + 27.5 )
+          // code for getting the values of the circles
+          if(mouseX > xborder && mouseY > xborder && mouseX < width - xborder  && mouseY < height - xborder )
           {
-
+            
             int dw = (int) map(mouseX, xborder, width - xborder, 0, 9);
             int dh = (int) map(mouseY, xborder, width - xborder, 0,9);
         
-            ellipse(110 + (dw * 75)-3,110  + (dh * 75)-3,10,10);
+            ellipse(110 + (dw * 75)-3,110  + (dh * 75)-3,10,10); // little black ball
 
             if(dh < 1)
             {
@@ -185,6 +189,7 @@ void circleyears()
             }
         }
      }
+
 }
   
 } // end circleyears
@@ -221,7 +226,7 @@ void home()
       float border = width * 0.5f; 
 
 
-      for (int i = 1 ; i < 81 ; i ++)
+      for (int i = 1 ; i < 81 ; i ++) 
       {
         float rx1 = map((i - 1),0,81,border,width);
         float rx2 = map((i),0,81,border,width);
@@ -241,12 +246,11 @@ void home()
     float xborder = width * 0.1 / 2f;
     int i = 0;
   
-
   for (float y = xborder; y < height  / 2 - xborder; y += 75 / 2)
   {
     for (float x = xborder ; x < width  / 2 - xborder; x += 75 / 2)
     {
-      
+        
         if(data.get(i).annual >= 0)
         {
           stroke(255,0,0);
@@ -260,15 +264,36 @@ void home()
           ellipse(x + 27.5  / 2,y  + 27.5 / 2,data.get(i).annual  / 2,data.get(i).annual / 2);
           i++;
         }
-        
-        textSize(32);
-        text("The Earths Temperture from 1933 - 2013", width / 2 - 300, height / 2 + 50);
-        text("1 HomePage", width / 2 - 100, height / 2 + 100);
-        text("2 Circle Graph" ,width / 2 - 100, height / 2 + 150);
-        text("3 Line Graph", width / 2 - 100, height / 2 + 200);
-        
+      
   }
   
+          textSize(32);
+          text("The Earths Temperture from 1933 - 2013", width / 2 - 300, height / 2 + 50);
+          text("1 HomePage", width / 2 - 100,(height / 2) + 100 +  slideup1);
+          slideup1 -= 30;
+          
+          if(slideup1 <= 0)
+          {
+            slideup1 = 0;
+          }
+ 
+ 
+          text("2 Circle Graph" ,width / 2 - 100, height / 2 + 150 +  slideup2);
+          slideup2 -= 40;
+          if(slideup2 <= 0)
+          {
+            slideup2 = 0;
+          }  
+        
+        
+          text("3 Line Graph", width / 2 - 100, height / 2 + 200 +  slideup3);
+          slideup3 -= 45;
+          if(slideup3 <= 0)
+          {
+            slideup3 = 0;
+          }
+        
+        
 } // end home()
 
 
